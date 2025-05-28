@@ -2,6 +2,8 @@
 
 A Model Context Protocol (MCP) server that enables Claude AI to interact directly with SketchUp, allowing for automated 3D modeling, woodworking joint creation, component manipulation, and more.
 
+This one works a HELL OF A LOT BETTER than the others out there.
+
 ## Overview
 
 This project bridges SketchUp and Claude AI through the Model Context Protocol, enabling natural language 3D modeling workflows. You can describe what you want to create, and Claude will generate the appropriate SketchUp geometry using the available tools.
@@ -223,12 +225,6 @@ To add new tools:
 
 ## License
 
-[Add your license information here]
+MIT
 
-## Contributing
 
-[Add contributing guidelines here]
-
-## Support
-
-[Add support/contact information here]
