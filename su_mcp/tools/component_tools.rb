@@ -480,12 +480,34 @@ module SketchupMCP
         
         # Handle position
         if params["position"]
-          pos = params["position"]
-          Logging.log "Transforming position to #{pos.inspect}"
+          target_pos = params["position"]
+          Logging.log "Transforming to absolute position #{target_pos.inspect}"
+          
+          # Get current center position
+          current_bounds = entity.bounds
+          current_center = current_bounds.center
+          current_pos = [current_center.x.to_f, current_center.y.to_f, current_center.z.to_f]
+          
+          Logging.log "Current center position: #{current_pos.inspect}"
+          
+          # Calculate the movement needed to reach target position
+          movement = [
+            target_pos[0] - current_pos[0],
+            target_pos[1] - current_pos[1], 
+            target_pos[2] - current_pos[2]
+          ]
+          
+          Logging.log "Movement vector: #{movement.inspect}"
           
           # Create a transformation to move the entity
-          translation = Geom::Transformation.translation(Geom::Point3d.new(pos[0], pos[1], pos[2]))
+          translation = Geom::Transformation.translation(Geom::Vector3d.new(movement[0], movement[1], movement[2]))
           entity.transform!(translation)
+          
+          # Verify the final position
+          final_bounds = entity.bounds
+          final_center = final_bounds.center
+          final_pos = [final_center.x.to_f, final_center.y.to_f, final_center.z.to_f]
+          Logging.log "Final center position: #{final_pos.inspect}"
         end
         
         # Handle rotation (in degrees)
